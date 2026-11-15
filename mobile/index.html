@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>DermaVision AI — Clinical Skin Intelligence</title>
+
+  <!-- Premium Typography: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // High-End Luxury Cosmetic & Clinical Pastel Palette
+            roseMist: {
+              50: '#FFF7F9',
+              100: '#FDF1F5',
+              200: '#FAE4ED',
+              300: '#F5C6D8',
+              400: '#EE98BA',
+              500: '#E06D9A',
+            },
+            coralPeach: {
+              300: '#FFD3C4',
+              400: '#F8B195',
+              500: '#F0967D',
+              600: '#E07A5F',
+              700: '#C86348',
+            },
+            lavenderGlow: {
+              50: '#FBF9FE',
+              100: '#F4EEF9',
+              200: '#E9DCF4',
+              300: '#D8BCE9',
+              400: '#C298DC',
+            },
+            botanicalSage: {
+              50: '#F2F9F5',
+              100: '#E3F4EA',
+              200: '#C8E8D5',
+              500: '#52B788',
+              700: '#2D6A4F',
+            },
+            warmLuxe: {
+              50: '#FDFCF7',
+              100: '#F9F6ED',
+              200: '#F3EEDC',
+              300: '#E8E1C8',
+            },
+            obsidian: {
+              900: '#141519',
+              800: '#1E2026',
+              700: '#2C2E38',
+              600: '#424553',
+              500: '#64687A',
+              400: '#9498A9',
+            },
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          borderRadius: {
+            '2xl': '20px',
+            '3xl': '28px',
+            '4xl': '36px',
+            '5xl': '48px',
+          },
+          boxShadow: {
+            'glass': '0 12px 36px -6px rgba(220, 180, 205, 0.22), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset',
+            'glass-subtle': '0 8px 24px -4px rgba(210, 180, 200, 0.14)',
+            'coral-glow': '0 10px 28px -4px rgba(224, 122, 95, 0.44)',
+            'sage-glow': '0 8px 24px -4px rgba(82, 183, 136, 0.35)',
+            'nav-float': '0 20px 45px -8px rgba(190, 150, 175, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.8) inset',
+            'device': '0 30px 90px -15px rgba(20, 20, 25, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at top left, #2D2535 0%, #15161E 100%);
+      color: #1E2026;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow-x: hidden;
+    }
+
+    input,
+    textarea {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+
+    /* Modal Animation */
+    @keyframes modalSlideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .animate-modal-up {
+      animation: modalSlideUp 0.30s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Ambient Glassmorphic Styling */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 12px 36px -6px rgba(220, 180, 205, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .glass-card-subtle {
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .glass-nav-bar {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 48px -10px rgba(180, 140, 165, 0.32), 0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
+    }
+
+    .coral-btn {
+      background: linear-gradient(135deg, #F0967D 0%, #E07A5F 100%);
+      box-shadow: 0 10px 26px -3px rgba(224, 122, 95, 0.42);
+      color: #FFFFFF;
+      transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .coral-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 4px 14px -2px rgba(224, 122, 95, 0.3);
+    }
+
+    /* Spring touch response */
+    .touch-spring {
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+    .touch-spring:active {
+      transform: scale(0.96);
+    }
+
+    /* Subtle Card Shimmer Effect */
+    @keyframes glassShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .glass-shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: glassShimmer 5s infinite;
+    }
+
+    /* Ambient Orb Floating Drift */
+    @keyframes orbDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(12px, -18px) scale(1.06); }
+    }
+    .animate-orb-drift {
+      animation: orbDrift 12s ease-in-out infinite;
+    }
+
+    /* Sparkle Burst Particle Animation */
+    @keyframes particleFloat {
+      0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--tx, 0px), var(--ty, -40px)) scale(1.2); opacity: 0; }
+    }
+    .sparkle-particle {
+      position: absolute;
+      pointer-events: none;
+      animation: particleFloat 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 60;
+    }
+
+    /* Screen Fade Slide Animation */
+    @keyframes screenSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.99);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .screen-animate {
+      animation: screenSlideIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Reticle Pulse Effect */
+    @keyframes reticleGlow {
+      0% {
+        transform: scale(0.96);
+        opacity: 0.75;
+        box-shadow: 0 0 0 0 rgba(240, 150, 125, 0.4);
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 1;
+        box-shadow: 0 0 24px 6px rgba(240, 150, 125, 0.55);
+      }
+      100% {
+        transform: scale(0.96);
+        opacity: 0.75;
+        box-shadow: 0 0 0 0 rgba(240, 150, 125, 0.4);
+      }
+    }
+    .animate-reticle-pulse {
+      animation: reticleGlow 2.8s ease-in-out infinite;
+    }
+
+    /* Hide scrollbars */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Google Icons config - Pixel-Perfect Font Alignment */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 22;
+      vertical-align: middle;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      user-select: none;
+    }
+
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 600;
+    }
+  </style>
+</head>
+
+<body
+  class="flex items-center justify-center min-h-screen p-0 sm:p-5 sm:py-8 antialiased selection:bg-coralPeach-300 selection:text-obsidian-900">
+
+  <!-- Mobile Phone Canvas (Adapts dynamically to mobile phone screen or desktop bezel) -->
+  <div id="mobile-app"
+    class="relative w-full max-w-[420px] h-[100dvh] sm:h-[860px] sm:max-h-[92vh] sm:rounded-[46px] sm:shadow-device overflow-hidden flex flex-col bg-gradient-to-b from-roseMist-50 via-roseMist-100 to-lavenderGlow-100 border-0 sm:border-[8px] sm:border-obsidian-800/95 transition-all">
+
+    <!-- Ambient Glowing Gradient Orbs (Directly from Skincare Luxury Reference 1) -->
+    <div
+      class="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-roseMist-300/40 blur-3xl pointer-events-none animate-orb-drift"></div>
+    <div class="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-lavenderGlow-300/35 blur-3xl pointer-events-none animate-orb-drift" style="animation-delay: -4s;">
+    </div>
+    <div class="absolute -bottom-24 left-1/4 w-96 h-96 rounded-full bg-coralPeach-300/25 blur-3xl pointer-events-none animate-orb-drift" style="animation-delay: -8s;">
+    </div>
+
+    <!-- Phone Top Notch & Dynamic Island Area -->
+    <div id="status-bar"
+      class="relative w-full pt-3 pb-1 px-7 flex justify-between items-center text-xs font-semibold text-obsidian-800 select-none z-50">
+      <!-- Time Clock -->
+      <span id="clock-display" class="font-mono font-bold tracking-tight text-[13px]">09:41</span>
+
+      <!-- Modern Dynamic Island Bezel Pill (Interactive on desktop viewport) -->
+      <div onclick="toggleDynamicIsland()"
+        class="cursor-pointer hidden sm:flex items-center justify-center w-28 h-6 bg-black rounded-full shadow-inner border border-white/10 px-2.5 gap-1.5 transition-all duration-300 hover:w-40 group" id="dynamic-island-pill" title="Tap for system diagnostics">
+        <div class="w-2 h-2 rounded-full bg-emerald-500/90 animate-ping" id="dynamic-island-indicator"></div>
+        <span class="text-[9px] font-mono font-bold text-white/80 group-hover:text-white transition-colors tracking-tight whitespace-nowrap" id="dynamic-island-label">Derma v2.4</span>
+      </div>
+
+      <!-- System Connectivity & Battery -->
+      <div class="flex items-center gap-1.5 text-[14px] text-obsidian-700">
+        <span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+        <span class="material-symbols-outlined text-[15px]">wifi</span>
+        <span class="material-symbols-outlined text-[17px]">battery_full</span>
+      </div>
+    </div>
+
+    <!-- Active Screen Viewport -->
+    <main id="app-viewport" class="flex-1 overflow-y-auto no-scrollbar relative flex flex-col pb-28 pt-1 z-10">
+      <!-- Screens dynamically rendered via app.js -->
+    </main>
+
+    <!-- Elevated Luxury Floating Bottom Navigation Bar -->
+    <nav id="bottom-nav"
+      class="absolute bottom-4 inset-x-4 glass-nav-bar rounded-full px-3 py-1.5 flex items-center justify-around z-40 transition-all duration-300">
+      <!-- Tab 1: Home Dashboard -->
+      <button onclick="navigateTo('dashboard')" id="nav-btn-dashboard"
+        class="flex items-center gap-1.5 px-3.5 py-2 rounded-full transition-all text-coralPeach-600 bg-coralPeach-400/15 font-bold text-xs touch-spring">
+        <span class="material-symbols-outlined text-[20px] fill-1 text-coralPeach-600">spa</span>
+        <span class="text-[11px] font-bold">Home</span>
+      </button>
+
+      <!-- Tab 2: History Timeline -->
+      <button onclick="navigateTo('history')" id="nav-btn-history"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">calendar_today</span>
+      </button>
+
+      <!-- Center Floating Camera Scan Trigger (Elevated Action) -->
+      <button onclick="navigateTo('camera')" id="nav-btn-camera"
+        class="flex items-center justify-center w-12 h-12 rounded-full coral-btn shadow-coral-glow -my-3 touch-spring">
+        <span class="material-symbols-outlined text-[24px] text-white">photo_camera</span>
+      </button>
+
+      <!-- Tab 4: Skincare Guides -->
+      <button onclick="navigateTo('education')" id="nav-btn-education"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">auto_stories</span>
+      </button>
+
+      <!-- Tab 5: Profile & Privacy -->
+      <button onclick="navigateTo('profile')" id="nav-btn-profile"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">account_circle</span>
+      </button>
+    </nav>
+
+    <!-- Bottom Home Bar Indicator -->
+    <div
+      class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-obsidian-900/30 rounded-full z-40 pointer-events-none">
+    </div>
+
+    <!-- Slide-Up Interactive Modal / Drawer Container -->
+    <div id="app-modal" onclick="closeModal(event)"
+      class="hidden absolute inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col justify-end transition-opacity duration-300">
+      <div id="modal-box" onclick="event.stopPropagation()"
+        class="w-full max-h-[85%] overflow-y-auto glass-card rounded-t-4xl p-6 shadow-2xl space-y-4 animate-modal-up border-t border-white/90">
+        <!-- Dynamically injected modal content -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

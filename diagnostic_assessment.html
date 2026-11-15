@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Derma Vision - AI Diagnostic Analysis &amp; Clinical Risk Assessment</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#002e6a",
+            "surface-container-high": "#272a32",
+            "on-surface-variant": "#b9cacb",
+            "surface-variant": "#32353d",
+            "on-secondary-container": "#005346",
+            "on-primary-fixed": "#002022",
+            "surface-bright": "#363941",
+            "secondary-container": "#00d0b2",
+            "inverse-primary": "#00696f",
+            "background": "#10131a",
+            "secondary-fixed-dim": "#2adec0",
+            "inverse-on-surface": "#2d3038",
+            "surface-container-highest": "#32353d",
+            "on-primary-container": "#006a70",
+            "surface-container-lowest": "#0b0e15",
+            "on-tertiary-fixed-variant": "#004395",
+            "surface-dim": "#10131a",
+            "error-container": "#93000a",
+            "surface-tint": "#00dce6",
+            "tertiary-container": "#cddbff",
+            "surface-container": "#1d1f27",
+            "on-tertiary-container": "#005cc5",
+            "surface": "#10131a",
+            "error": "#ffb4ab",
+            "on-primary-fixed-variant": "#004f53",
+            "on-tertiary-fixed": "#001a42",
+            "tertiary": "#f7f7ff",
+            "secondary-fixed": "#57fbdb",
+            "on-secondary-fixed-variant": "#005144",
+            "tertiary-fixed": "#d8e2ff",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#00dce6",
+            "on-surface": "#e1e2ec",
+            "on-error-container": "#ffdad6",
+            "on-background": "#e1e2ec",
+            "surface-container-low": "#191b23",
+            "tertiary-fixed-dim": "#adc6ff",
+            "primary-fixed": "#6ff6ff",
+            "outline": "#849495",
+            "on-primary": "#00373a",
+            "primary": "#e0fdff",
+            "on-secondary-fixed": "#00201a",
+            "inverse-surface": "#e1e2ec",
+            "secondary": "#43edcd",
+            "primary-container": "#00f2fe",
+            "on-secondary": "#00382e",
+            "outline-variant": "#3a494b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "space-md": "1rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-xl": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-xl-mobile": ["Inter"],
+            "label-md": ["JetBrains Mono"],
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "data-metric": ["JetBrains Mono"],
+            "label-sm": ["JetBrains Mono"],
+            "label-lg": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "data-metric": ["22px", { "lineHeight": "26px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    /* Precision Reticle Pulse & Scanlines */
+    @keyframes scanline {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(1000%); }
+    }
+    .scan-beam {
+      animation: scanline 4s linear infinite;
+    }
+    
+    /* Radial gauge glow */
+    .gauge-glow {
+      filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.45)) drop-shadow(0 0 20px rgba(0, 210, 180, 0.25));
+    }
+    
+    /* Smooth custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0e15;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3a494b;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen pb-36 selection:bg-primary-container selection:text-on-primary-container">
+<!-- TOP HEADER BAR (Context-aware subpage header with navigation back to Camera HUD) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/85 backdrop-blur-xl px-4 py-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center space-x-3">
+<!-- Back to Camera HUD -->
+<a class="w-9 h-9 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors active:scale-95" href="index.html" title="Back to Camera HUD">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</a>
+<div>
+<div class="flex items-center space-x-2">
+<h1 class="text-headline-sm font-headline-sm text-primary tracking-tight">Diagnostic Assessment</h1>
+<span class="flex items-center space-x-1 px-1.5 py-0.5 rounded bg-secondary-container/20 border border-secondary/30">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-secondary font-semibold">AI VERIFIED</span>
+</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant flex items-center space-x-2 mt-0.5">
+<span class="text-primary-fixed-dim">PROTOCOL: DERMA-SPEC</span>
+<span>•</span>
+<span>CONFIDENCE TIER 1</span>
+</p>
+</div>
+</div>
+<!-- Trailing Actions & Patient Tag -->
+<div class="flex items-center space-x-2">
+<div class="hidden sm:flex flex-col items-end mr-1">
+<span class="text-label-sm font-label-sm text-on-surface-variant">SUBJECT</span>
+<span class="text-label-md font-label-md text-primary font-semibold">PT #8429-A</span>
+</div>
+<span class="sm:hidden px-2 py-1 rounded bg-surface-container-high/60 border border-outline-variant/40 text-label-sm font-label-sm text-primary font-mono">
+        PT #8429-A
+      </span>
+<button class="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[18px]">bookmark</span>
+</button>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="pt-20 px-4 max-w-xl mx-auto space-y-4">
+<!-- 1. LESION SNAPSHOT & OPTICAL TELEMETRY CARD -->
+<section class="relative rounded-xl overflow-hidden bg-surface-container-lowest border border-outline-variant/40 shadow-2xl">
+<!-- High-Res Dermoscopic Scan Viewport -->
+<div class="relative w-full h-64 bg-surface-container-lowest overflow-hidden">
+<!-- Live Dermoscopy Image with Scanline -->
+<img alt="High-resolution dermoscopic macro scan of cutaneous lesion" class="w-full h-full object-cover object-center filter contrast-105 brightness-95" src="https://lh3.googleusercontent.com/aida/ALJJyrD2ND71uutnPOzyQAR2i47fTdQlMAMCe5cbGjsBLBgZeHk0SWFv6JR-59QhvuowtA21jyl_Q5b038tN_xdZpiYIM8nfxlr7JIaycz5oIwe6aZtEFULawHWs1yHiEwHeyuCTMXjcUdN23YxMcM57ovOZQ38ia2sbyOV3LGAwT8R2LFahqKv6NS6YWDBb69jea5kxq4Q9EOJDfj95JJBwEwjipXCQR951iMUndbVFqhoI2G-VNzjt2HCh1wyj"/>
+<!-- Subtle Scanbeam Overlay -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+<div class="w-full h-1 bg-gradient-to-r from-transparent via-primary-container to-transparent scan-beam"></div>
+</div>
+<!-- High-Tech Medical HUD Overlays & Reticles -->
+<div class="absolute inset-0 p-3 pointer-events-none flex flex-col justify-between">
+<!-- Top Badges Overlay -->
+<div class="flex items-center justify-between w-full pointer-events-auto">
+<div class="flex items-center space-x-1.5 px-2.5 py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/40">
+<span class="material-symbols-outlined text-secondary text-[14px]">accessibility_new</span>
+<span class="text-label-sm font-label-sm text-on-surface font-medium">Right Forearm · Anterior</span>
+</div>
+<div class="flex items-center space-x-1.5 px-2.5 py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/40">
+<span class="material-symbols-outlined text-primary-container text-[14px]">schedule</span>
+<span class="text-label-sm font-label-sm text-primary tracking-tight">Today, 14:32:08 UTC</span>
+</div>
+</div>
+<!-- Center Segmentation Box & Optical Reticle Brackets -->
+<div class="relative flex items-center justify-center">
+<div class="relative w-36 h-36 border border-primary-container/40 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(0,242,254,0.15)]">
+<!-- Corner Brackets -->
+<span class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-primary-container"></span>
+<span class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-primary-container"></span>
+<span class="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-primary-container"></span>
+<span class="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-primary-container"></span>
+<!-- Crosshair Center Indicator -->
+<span class="material-symbols-outlined text-primary-container/60 text-[20px]">filter_center_focus</span>
+<!-- Telemetry Label Pin -->
+<div class="absolute -top-3 right-0 transform translate-x-2 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded border border-primary-container/40 text-[9px] font-label-sm text-primary font-mono whitespace-nowrap shadow-sm">
+                Ø 4.4mm · CONF 94.8%
+              </div>
+</div>
+</div>
+<!-- Bottom Controls Overlay (Polarized, Crosshair, Zoom) -->
+<div class="flex items-center justify-between pointer-events-auto">
+<div class="flex items-center space-x-1.5">
+<button class="px-2 py-1 rounded bg-surface-container-lowest/85 backdrop-blur-md border border-secondary/40 text-secondary text-label-sm font-label-sm flex items-center space-x-1 hover:bg-secondary/10 transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>POLARIZED LIGHT</span>
+</button>
+<button class="px-2 py-1 rounded bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/30 text-on-surface-variant text-label-sm font-label-sm hover:text-primary hover:border-primary-container/40 transition-colors">
+                CROSSHAIRS
+              </button>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-lowest/90 backdrop-blur-md border border-outline-variant/40 text-label-sm font-label-sm text-primary-fixed font-bold tracking-wider">
+              ZOOM: 20X
+            </span>
+</div>
+</div>
+</div>
+<!-- Telemetry Strip Beneath Image -->
+<div class="px-3.5 py-2.5 bg-surface-container-low/90 backdrop-blur-md border-t border-outline-variant/30 flex items-center justify-between text-label-sm font-label-sm">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-container text-[16px]">biotech</span>
+<span>Dermoscopy Ref: <span class="text-on-surface font-semibold">#DS-88219</span></span>
+</div>
+<div class="flex items-center space-x-1.5 text-secondary">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span class="font-semibold text-primary">99.4% OPTICAL SCORE</span>
+</div>
+</div>
+</section>
+<!-- 2. PRIMARY AI RISK ASSESSMENT SCORE DIAL / GAUGE -->
+<section class="rounded-xl p-5 bg-surface-container-lowest/80 backdrop-blur-xl border border-outline-variant/30 relative overflow-hidden shadow-xl">
+<!-- Glow ambient backdrop -->
+<div class="absolute -top-16 -right-16 w-44 h-44 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -left-16 w-44 h-44 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col items-center text-center relative z-10">
+<!-- Header micro-label -->
+<div class="w-full flex items-center justify-between pb-3 border-b border-outline-variant/20 mb-4">
+<span class="text-label-sm font-label-sm text-on-surface-variant flex items-center space-x-1">
+<span class="material-symbols-outlined text-primary text-[14px]">psychology</span>
+<span>NEURAL ENSEMBLE CLASSIFICATION</span>
+</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded border border-secondary/25">
+            CALIBRATED
+          </span>
+</div>
+<!-- Radial Gauge Container -->
+<div class="relative w-44 h-44 flex items-center justify-center my-1">
+<!-- SVG Radial Dial Gauge -->
+<svg class="w-full h-full transform -rotate-90 gauge-glow" viewbox="0 0 160 160">
+<!-- Background Arc (Inactive) -->
+<circle class="stroke-surface-container-highest" cx="80" cy="80" fill="transparent" r="68" stroke-dasharray="427" stroke-dashoffset="106" stroke-linecap="round" stroke-width="9"></circle>
+<!-- Active Risk Fill Arc (Low Risk = ~12%) -->
+<circle class="stroke-secondary" cx="80" cy="80" fill="transparent" r="68" stroke-dasharray="427" stroke-dashoffset="350" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<!-- Dial Center Info Box -->
+<div class="absolute flex flex-col items-center justify-center text-center">
+<div class="w-6 h-6 rounded-full bg-secondary/15 border border-secondary/30 flex items-center justify-center mb-1 text-secondary">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+</div>
+<span class="text-headline-lg font-headline-lg font-bold text-primary tracking-tight leading-none">LOW RISK</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1">Benign Morphology</span>
+<span class="mt-2 text-label-sm font-label-sm text-secondary bg-surface-container-high/80 px-2 py-0.5 rounded-full border border-secondary/30">
+              94.8% AI Confidence
+            </span>
+</div>
+</div>
+<!-- Risk Spectrum Bar Indicator -->
+<div class="w-full mt-4 space-y-1.5">
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-semibold">Low (0 - 30)</span>
+<span class="text-[#FFB020]">Moderate (31 - 70)</span>
+<span class="text-[#FF453A]">High (71 - 100)</span>
+</div>
+<div class="relative w-full h-2.5 rounded-full bg-surface-container-highest overflow-hidden p-0.5 flex">
+<!-- Low Segment -->
+<div class="w-[30%] h-full bg-gradient-to-r from-secondary-container to-secondary rounded-l-full"></div>
+<!-- Moderate Segment -->
+<div class="w-[40%] h-full bg-[#FFB020]/40"></div>
+<!-- High Segment -->
+<div class="w-[30%] h-full bg-[#FF453A]/40 rounded-r-full"></div>
+<!-- Pin Indicator positioned at score: 12 -->
+<div class="absolute top-0 bottom-0 left-[12%] -translate-x-1/2 w-3 h-full bg-primary rounded-full shadow-[0_0_8px_#e0fdff] border border-surface-container-lowest"></div>
+</div>
+<div class="flex justify-between items-center text-label-sm font-label-sm text-on-surface-variant pt-1">
+<span>Score Index: <strong class="text-primary font-mono">12 / 100</strong></span>
+<span class="text-secondary">Morphological Stability: High</span>
+</div>
+</div>
+<!-- Model Telemetry Version Badge -->
+<div class="w-full mt-4 pt-3 border-t border-outline-variant/20 flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<div class="flex items-center space-x-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span class="font-mono">DeepDerm™ v4.2 Neural Classifier</span>
+</div>
+<span class="text-primary font-mono font-medium">Sens: 98.2%</span>
+</div>
+</div>
+</section>
+<!-- 3. FULL ABCDE CLINICAL DERMOSCOPY MATRIX -->
+<section class="space-y-2">
+<div class="flex items-center justify-between px-1">
+<h2 class="text-headline-sm font-headline-sm text-primary flex items-center space-x-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">grid_view</span>
+<span>ABCDE Clinical Metric Matrix</span>
+</h2>
+<span class="text-label-sm font-label-sm text-on-surface-variant">SURVEILLANCE CRITERIA</span>
+</div>
+<!-- Bento Grid for ABCDE Parameters -->
+<div class="grid grid-cols-2 gap-2.5">
+<!-- [A] Asymmetry -->
+<div class="rounded-xl p-3 bg-surface-container-lowest/80 backdrop-blur-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-primary-container/15 text-primary-container font-mono text-label-sm font-bold flex items-center justify-center border border-primary-container/30">A</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-1.5 py-0.2 rounded border border-secondary/20">NORMAL</span>
+</div>
+<div class="my-2">
+<div class="text-label-sm font-label-sm text-on-surface-variant">Asymmetry Index</div>
+<div class="text-data-metric font-data-metric text-primary">0.12</div>
+</div>
+<div class="flex items-center space-x-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">rotate_90_degrees_ccw</span>
+<span>Biaxial Symmetry Verified</span>
+</div>
+</div>
+<!-- [B] Border -->
+<div class="rounded-xl p-3 bg-surface-container-lowest/80 backdrop-blur-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-primary-container/15 text-primary-container font-mono text-label-sm font-bold flex items-center justify-center border border-primary-container/30">B</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-1.5 py-0.2 rounded border border-secondary/20">LOW ATYPIA</span>
+</div>
+<div class="my-2">
+<div class="text-label-sm font-label-sm text-on-surface-variant">Margin Definition</div>
+<div class="text-headline-sm font-headline-sm text-primary truncate">Regular / Distinct</div>
+</div>
+<div class="flex items-center space-x-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">line_style</span>
+<span>Edge Sharpness: 94%</span>
+</div>
+</div>
+<!-- [C] Color -->
+<div class="rounded-xl p-3 bg-surface-container-lowest/80 backdrop-blur-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-primary-container/15 text-primary-container font-mono text-label-sm font-bold flex items-center justify-center border border-primary-container/30">C</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-1.5 py-0.2 rounded border border-secondary/20">MONOTONE</span>
+</div>
+<div class="my-2">
+<div class="text-label-sm font-label-sm text-on-surface-variant">Pigment Network</div>
+<div class="text-headline-sm font-headline-sm text-primary">Uniform Brown</div>
+</div>
+<div class="flex items-center space-x-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-container text-[14px]">palette</span>
+<span>Melanin Index: 42</span>
+</div>
+</div>
+<!-- [D] Diameter -->
+<div class="rounded-xl p-3 bg-surface-container-lowest/80 backdrop-blur-lg border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="w-6 h-6 rounded bg-primary-container/15 text-primary-container font-mono text-label-sm font-bold flex items-center justify-center border border-primary-container/30">D</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-1.5 py-0.2 rounded border border-secondary/20">&lt; 6.0 mm</span>
+</div>
+<div class="my-2">
+<div class="text-label-sm font-label-sm text-on-surface-variant">Max Cross Diameter</div>
+<div class="text-data-metric font-data-metric text-primary">4.4 mm</div>
+</div>
+<div class="flex items-center space-x-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-[14px]">straighten</span>
+<span>Within Safe Bounds</span>
+</div>
+</div>
+<!-- [E] Evolution (Spans full 2 columns for timeline sparkline aesthetic) -->
+<div class="col-span-2 rounded-xl p-3.5 bg-surface-container-lowest/80 backdrop-blur-lg border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-start space-x-3">
+<span class="w-6 h-6 rounded bg-primary-container/15 text-primary-container font-mono text-label-sm font-bold flex items-center justify-center border border-primary-container/30 shrink-0 mt-0.5">E</span>
+<div>
+<div class="flex items-center space-x-2">
+<span class="text-headline-sm font-headline-sm text-primary">Evolution: Stable</span>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded border border-secondary/25">Δ 0% CHANGE</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">No morphological displacement detected vs baseline from 180d ago.</p>
+</div>
+</div>
+<!-- Sparkline representation -->
+<div class="shrink-0 pl-2">
+<svg class="w-16 h-8 stroke-secondary" fill="none" viewbox="0 0 64 32">
+<path d="M0 16 L20 16 L28 14 L36 17 L44 16 L64 16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<circle class="fill-secondary" cx="60" cy="16" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. DIFFERENTIAL DIAGNOSIS / NEURAL CONDITION MATCHES -->
+<section class="rounded-xl p-4 bg-surface-container-lowest/80 backdrop-blur-xl border border-outline-variant/30 space-y-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+<h3 class="text-headline-sm font-headline-sm text-primary flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">neurology</span>
+<span>Differential Diagnosis Matches</span>
+</h3>
+<span class="text-label-sm font-label-sm text-on-surface-variant">TOP 3 RANKED</span>
+</div>
+<!-- Condition 1: Primary Match -->
+<div class="p-3 rounded-lg bg-surface-container-low/70 border border-secondary/30 relative">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-body-lg font-body-lg text-primary font-medium">Melanocytic Nevus</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">(Common Mole)</span>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/15 px-2 py-0.5 rounded font-mono font-semibold border border-secondary/30">
+            BENIGN
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden mb-1">
+<div class="bg-secondary h-full rounded-full" style="width: 92.4%"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Probability match</span>
+<span class="text-secondary font-mono font-bold">92.4% Probability (High Confidence)</span>
+</div>
+</div>
+<!-- Condition 2: Secondary Match -->
+<div class="p-3 rounded-lg bg-surface-container-low/40 border border-outline-variant/20">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+<span class="text-body-md font-body-md text-on-surface">Seborrheic Keratosis</span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded font-mono">
+            BENIGN
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden mb-1">
+<div class="bg-on-surface-variant h-full rounded-full" style="width: 5.8%"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Probability match</span>
+<span class="text-on-surface-variant font-mono">5.8% Probability</span>
+</div>
+</div>
+<!-- Condition 3: High-Risk Surveillance -->
+<div class="p-3 rounded-lg bg-surface-container-low/40 border border-outline-variant/20">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-[#FF453A]/60"></span>
+<span class="text-body-md font-body-md text-on-surface">Melanoma Probability</span>
+</div>
+<span class="text-label-sm font-label-sm text-secondary bg-secondary/10 px-2 py-0.5 rounded font-mono">
+            LOW CONCERN / NEGATIVE
+          </span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden mb-1">
+<div class="bg-[#FF453A]/50 h-full rounded-full" style="width: 1.8%"></div>
+</div>
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Surveillance threshold &lt; 5.0%</span>
+<span class="text-secondary font-mono">1.8% Probability</span>
+</div>
+</div>
+<!-- FDA Info Callout -->
+<div class="flex items-center space-x-2 pt-1 text-label-sm font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-container text-[15px]">verified_user</span>
+<span>Differential diagnosis generated by FDA-cleared multi-spectral ensemble model.</span>
+</div>
+</section>
+<!-- 5. CLINICAL ACTION PLAN & AI DOCTOR'S GUIDANCE -->
+<section class="rounded-xl p-4 bg-surface-container-lowest/90 backdrop-blur-xl border border-secondary/35 shadow-lg relative">
+<div class="flex items-start space-x-3.5">
+<div class="w-10 h-10 rounded-lg bg-secondary/15 border border-secondary/30 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[22px]">medical_information</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<h3 class="text-headline-sm font-headline-sm text-primary">Clinical Action Plan</h3>
+<span class="text-label-sm font-label-sm text-primary-container font-mono">DR. SYNAPSE AI</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface leading-relaxed">
+            Morphology indicates benign nevus with uniform reticular network. No dysplastic signs detected. Routine self-monitoring advised. Recommended clinical follow-up in <strong class="text-primary font-semibold">6 months (October 2025)</strong>.
+          </p>
+<!-- Calendar reminder interactive checkbox -->
+<label class="flex items-center space-x-2 pt-1 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-high border-outline-variant text-secondary focus:ring-secondary focus:ring-offset-surface-container-lowest" type="checkbox"/>
+<span class="text-label-sm font-label-sm text-on-surface font-medium">Add reminder to Health Calendar</span>
+</label>
+</div>
+</div>
+</section>
+</main>
+<!-- 6. FIXED BOTTOM STICKY ACTION BAR -->
+<aside class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl border-t border-outline-variant/30 px-4 pt-3 pb-4 shadow-2xl safe-bottom">
+<div class="max-w-xl mx-auto space-y-2.5">
+<div class="grid grid-cols-12 gap-3">
+<!-- Secondary Button: Save to Archive -->
+<button class="col-span-5 h-12 rounded-lg bg-surface-container-high/70 hover:bg-surface-container-high text-primary border border-outline-variant/40 flex items-center justify-center space-x-2 transition-all active:scale-95 text-label-md font-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px]">folder_shared</span>
+<span>Save Archive</span>
+</button>
+<!-- Primary Glowing CTA Button: Consult Dermatologist -->
+<button class="col-span-7 h-12 rounded-lg bg-gradient-to-r from-primary-container to-secondary text-on-primary-fixed font-semibold flex items-center justify-center space-x-2 shadow-[0_0_20px_rgba(0,242,254,0.4)] hover:shadow-[0_0_25px_rgba(67,237,205,0.6)] transition-all active:scale-95 text-label-md font-label-md">
+<span class="material-symbols-outlined text-[20px]">video_call</span>
+<span>Consult Dermatologist</span>
+</button>
+</div>
+<!-- Regulatory Medical Disclaimer -->
+<p class="text-center text-[10px] font-label-sm text-on-surface-variant/80 tracking-tight">
+        AI triage tool. Not a substitute for formal histopathological examination.
+      </p>
+</div>
+</aside>
+</body></html>
