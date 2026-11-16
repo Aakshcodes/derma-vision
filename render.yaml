@@ -1,0 +1,10 @@
+# Render.com Blueprint Specification for DermaVision AI
+services:
+  - type: web
+    name: dermavision-ai
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PORT
+        value: 10000
