@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from .api.v1.analysis import router as analysis_router
@@ -48,8 +49,20 @@ def health_check():
     }
 
 
-# Mount the mobile web application at root
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return Response(status_code=204)
+
+
+@app.get("/mobile", include_in_schema=False)
+def mobile_redirect():
+    return RedirectResponse(url="/")
+
+
+# Mount the mobile web application at root and /mobile
 from pathlib import Path
 mobile_dir = Path(__file__).resolve().parent.parent.parent / "mobile"
 if mobile_dir.exists():
+    app.mount("/mobile", StaticFiles(directory=str(mobile_dir), html=True), name="mobile_frontend_alias")
     app.mount("/", StaticFiles(directory=str(mobile_dir), html=True), name="mobile_frontend")
+
