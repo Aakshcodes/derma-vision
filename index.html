@@ -1,447 +1,380 @@
 <!DOCTYPE html>
+<html lang="en">
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Derma Vision: AI Skin Scanner</title>
-<!-- Material Symbols Outlined -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Fonts: Inter & JetBrains Mono -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>DermaVision AI — Clinical Skin Intelligence</title>
+
+  <!-- Premium Typography: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
-          "colors": {
-            "on-surface-variant": "#b9cacb",
-            "on-primary-container": "#006a70",
-            "primary": "#e0fdff",
-            "secondary-fixed-dim": "#2adec0",
-            "primary-fixed-dim": "#00dce6",
-            "tertiary-fixed": "#d8e2ff",
-            "on-secondary-fixed": "#00201a",
-            "on-primary-fixed": "#002022",
-            "surface-container-high": "#272a32",
-            "tertiary-fixed-dim": "#adc6ff",
-            "inverse-primary": "#00696f",
-            "surface-container-low": "#191b23",
-            "on-tertiary": "#002e6a",
-            "surface-container": "#1d1f27",
-            "on-secondary-container": "#005346",
-            "inverse-surface": "#e1e2ec",
-            "on-tertiary-container": "#005cc5",
-            "on-error-container": "#ffdad6",
-            "surface-container-lowest": "#0b0e15",
-            "surface-container-highest": "#32353d",
-            "surface-bright": "#363941",
-            "on-background": "#e1e2ec",
-            "surface-tint": "#00dce6",
-            "primary-fixed": "#6ff6ff",
-            "error-container": "#93000a",
-            "on-secondary": "#00382e",
-            "surface-variant": "#32353d",
-            "outline-variant": "#3a494b",
-            "surface": "#10131a",
-            "secondary": "#43edcd",
-            "background": "#10131a",
-            "on-tertiary-fixed-variant": "#004395",
-            "primary-container": "#00f2fe",
-            "on-error": "#690005",
-            "outline": "#849495",
-            "on-primary-fixed-variant": "#004f53",
-            "tertiary": "#f7f7ff",
-            "secondary-fixed": "#57fbdb",
-            "tertiary-container": "#cddbff",
-            "on-surface": "#e1e2ec",
-            "on-tertiary-fixed": "#001a42",
-            "inverse-on-surface": "#2d3038",
-            "secondary-container": "#00d0b2",
-            "surface-dim": "#10131a",
-            "on-primary": "#00373a",
-            "on-secondary-fixed-variant": "#005144",
-            "error": "#ffb4ab"
+          colors: {
+            // High-End Luxury Cosmetic & Clinical Pastel Palette
+            roseMist: {
+              50: '#FFF7F9',
+              100: '#FDF1F5',
+              200: '#FAE4ED',
+              300: '#F5C6D8',
+              400: '#EE98BA',
+              500: '#E06D9A',
+            },
+            coralPeach: {
+              300: '#FFD3C4',
+              400: '#F8B195',
+              500: '#F0967D',
+              600: '#E07A5F',
+              700: '#C86348',
+            },
+            lavenderGlow: {
+              50: '#FBF9FE',
+              100: '#F4EEF9',
+              200: '#E9DCF4',
+              300: '#D8BCE9',
+              400: '#C298DC',
+            },
+            botanicalSage: {
+              50: '#F2F9F5',
+              100: '#E3F4EA',
+              200: '#C8E8D5',
+              500: '#52B788',
+              700: '#2D6A4F',
+            },
+            warmLuxe: {
+              50: '#FDFCF7',
+              100: '#F9F6ED',
+              200: '#F3EEDC',
+              300: '#E8E1C8',
+            },
+            obsidian: {
+              900: '#141519',
+              800: '#1E2026',
+              700: '#2C2E38',
+              600: '#424553',
+              500: '#64687A',
+              400: '#9498A9',
+            },
           },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           },
-          "spacing": {
-            "margin": "1.5rem",
-            "space-md": "1rem",
-            "gutter-mobile": "0.75rem",
-            "margin-mobile": "1rem",
-            "space-xs": "0.25rem",
-            "space-xl": "2.5rem",
-            "gutter": "1rem",
-            "space-sm": "0.5rem",
-            "space-lg": "1.5rem"
+          borderRadius: {
+            '2xl': '20px',
+            '3xl': '28px',
+            '4xl': '36px',
+            '5xl': '48px',
           },
-          "fontFamily": {
-            "headline-md": ["Inter"],
-            "headline-lg": ["Inter"],
-            "body-lg": ["Inter"],
-            "label-sm": ["JetBrains Mono"],
-            "body-md": ["Inter"],
-            "headline-sm": ["Inter"],
-            "label-md": ["JetBrains Mono"],
-            "data-metric": ["JetBrains Mono"],
-            "body-sm": ["Inter"],
-            "headline-xl": ["Inter"],
-            "headline-xl-mobile": ["Inter"],
-            "label-lg": ["JetBrains Mono"]
-          },
-          "fontSize": {
-            "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
-            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
-            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
-            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "500" }],
-            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
-            "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
-            "data-metric": ["22px", { "lineHeight": "26px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
-            "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
-            "headline-xl-mobile": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
-            "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }]
+          boxShadow: {
+            'glass': '0 12px 36px -6px rgba(220, 180, 205, 0.22), 0 0 1px 1px rgba(255, 255, 255, 0.9) inset',
+            'glass-subtle': '0 8px 24px -4px rgba(210, 180, 200, 0.14)',
+            'coral-glow': '0 10px 28px -4px rgba(224, 122, 95, 0.44)',
+            'sage-glow': '0 8px 24px -4px rgba(82, 183, 136, 0.35)',
+            'nav-float': '0 20px 45px -8px rgba(190, 150, 175, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.8) inset',
+            'device': '0 30px 90px -15px rgba(20, 20, 25, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.1)',
           }
         }
       }
-    }
+    };
   </script>
-<style>
-    /* Custom optical reticle animations */
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+
+  <style>
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
     }
-    @keyframes pulse-ring {
-      0% { transform: scale(0.96); opacity: 0.6; }
-      50% { transform: scale(1.04); opacity: 1; filter: drop-shadow(0 0 14px rgba(0, 242, 254, 0.6)); }
-      100% { transform: scale(0.96); opacity: 0.6; }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
     }
-    @keyframes radar-sweep {
-      0% { stroke-dashoffset: 400; }
-      100% { stroke-dashoffset: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: radial-gradient(circle at top left, #2D2535 0%, #15161E 100%);
+      color: #1E2026;
+      user-select: none;
+      -webkit-user-select: none;
+      overflow-x: hidden;
     }
-    .animate-spin-slow {
-      animation: spin-slow 48s linear infinite;
+
+    input,
+    textarea {
+      user-select: text !important;
+      -webkit-user-select: text !important;
     }
-    .animate-pulse-optical {
-      animation: pulse-ring 2.8s ease-in-out infinite;
+
+    /* Modal Animation */
+    @keyframes modalSlideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
-    .reticle-svg {
-      animation: spin-slow 60s linear infinite;
+
+    .animate-modal-up {
+      animation: modalSlideUp 0.30s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    .scan-dash-anim {
-      stroke-dasharray: 8 6;
-      animation: radar-sweep 20s linear infinite;
+
+    /* Ambient Glassmorphic Styling */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      box-shadow: 0 12px 36px -6px rgba(220, 180, 205, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .glass-card-subtle {
+      background: rgba(255, 255, 255, 0.58);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+    }
+
+    .glass-nav-bar {
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 48px -10px rgba(180, 140, 165, 0.32), 0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
+    }
+
+    .coral-btn {
+      background: linear-gradient(135deg, #F0967D 0%, #E07A5F 100%);
+      box-shadow: 0 10px 26px -3px rgba(224, 122, 95, 0.42);
+      color: #FFFFFF;
+      transition: all 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .coral-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 4px 14px -2px rgba(224, 122, 95, 0.3);
+    }
+
+    /* Spring touch response */
+    .touch-spring {
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+    }
+    .touch-spring:active {
+      transform: scale(0.96);
+    }
+
+    /* Subtle Card Shimmer Effect */
+    @keyframes glassShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .glass-shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: glassShimmer 5s infinite;
+    }
+
+    /* Ambient Orb Floating Drift */
+    @keyframes orbDrift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(12px, -18px) scale(1.06); }
+    }
+    .animate-orb-drift {
+      animation: orbDrift 12s ease-in-out infinite;
+    }
+
+    /* Sparkle Burst Particle Animation */
+    @keyframes particleFloat {
+      0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
+      100% { transform: translate(var(--tx, 0px), var(--ty, -40px)) scale(1.2); opacity: 0; }
+    }
+    .sparkle-particle {
+      position: absolute;
+      pointer-events: none;
+      animation: particleFloat 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      z-index: 60;
+    }
+
+    /* Screen Fade Slide Animation */
+    @keyframes screenSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(14px) scale(0.99);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .screen-animate {
+      animation: screenSlideIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Reticle Pulse Effect */
+    @keyframes reticleGlow {
+      0% {
+        transform: scale(0.96);
+        opacity: 0.75;
+        box-shadow: 0 0 0 0 rgba(240, 150, 125, 0.4);
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 1;
+        box-shadow: 0 0 24px 6px rgba(240, 150, 125, 0.55);
+      }
+      100% {
+        transform: scale(0.96);
+        opacity: 0.75;
+        box-shadow: 0 0 0 0 rgba(240, 150, 125, 0.4);
+      }
+    }
+    .animate-reticle-pulse {
+      animation: reticleGlow 2.8s ease-in-out infinite;
+    }
+
+    /* Hide scrollbars */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Google Icons config - Pixel-Perfect Font Alignment */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 450, 'GRAD' 0, 'opsz' 22;
+      vertical-align: middle;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      user-select: none;
+    }
+
+    .material-symbols-outlined.fill-1 {
+      font-variation-settings: 'FILL' 1, 'wght' 600;
     }
   </style>
 </head>
-<body class="bg-surface text-on-surface antialiased overflow-hidden select-none touch-none w-screen h-screen">
-<!-- ========================================================= -->
-<!-- 1. FULL-SCREEN LIVE CAMERA FEED BACKGROUND               -->
-<!-- ========================================================= -->
-<div class="absolute inset-0 z-0 overflow-hidden bg-surface-container-lowest">
-<!-- Camera Viewport Layer with specified image placeholder -->
-<img alt="Dermatoscope feed" class="w-full h-full object-cover object-center transform scale-105 filter brightness-105 contrast-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpSG4CLSuPbTncsXQo3-TSjCRFf24BlryjnjjIOza7huZGRT7Q_jJX-MYmE4lTt6vCGNBFpwA6yBtXcgAZEi-NOzK9-MMT28lGVNC_Yu1ZPFGWIYBjudrcs38jdpU74sQJ48zUFSpzM6afPNpHc285NdBAs4J7Ex-nGQs9uZmA4EEWXNShDuBSwYcADlvizScHEUv0IfDE2Xx181AE33lEcJ6lS0QeICe4__befVAzN93aMr8yiYS882P1WmEGUmVFYP6qsa8jOw6N"/>
-<!-- Scientific Dermatoscopy Vignette & Cross-Polarized Optical Grid -->
-<div class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_35%,rgba(10,13,20,0.6)_75%,rgba(10,13,20,0.92)_100%)]"></div>
-<!-- Optical Coordinate Grid Lines -->
-<div class="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(to_right,rgba(0,242,254,0.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,242,254,0.15)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-</div>
-<!-- ========================================================= -->
-<!-- 2. TOP HUD BAR (Anchored directly to Shared TopAppBar)   -->
-<!-- ========================================================= -->
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 py-2 bg-surface-container-lowest/80 dark:bg-surface-container-lowest/80 backdrop-blur-md shadow-sm">
-<div class="flex items-center space-x-2">
-<span class="material-symbols-outlined text-primary dark:text-primary text-[20px]" data-icon="lens_blur">lens_blur</span>
-<div class="flex flex-col">
-<span class="text-label-md font-label-md tracking-wider uppercase font-semibold text-primary dark:text-primary flex items-center gap-1.5">
-          DERMASPEC OPTICAL HUD
-          <span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-ping"></span>
-</span>
-<span class="text-body-sm font-body-sm text-on-surface-variant flex items-center gap-1">
-<span class="font-label-sm text-label-sm text-secondary">AI OPTICAL v2.4</span>
-<span>•</span>
-<span class="font-label-sm text-label-sm">CONF: 99.1%</span>
-</span>
-</div>
-</div>
-<!-- Top Action & Diagnostic Telemetry Icons -->
-<div class="flex items-center space-x-2">
-<div class="flex items-center bg-surface-container-high/60 backdrop-blur-md rounded-lg p-0.5 border border-outline-variant/30">
-<!-- Flash Light Mode -->
-<button class="p-1.5 rounded hover:bg-surface-container-high/60 hover:text-primary transition-colors duration-150 active:scale-95 text-secondary-container flex items-center" title="Cross-Polarized Lighting">
-<span class="material-symbols-outlined text-[18px]" data-icon="flare">flare</span>
-</button>
-<!-- Macro Mode indicator -->
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm uppercase bg-secondary-container/20 text-secondary border border-secondary/30 flex items-center gap-1">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-          MACRO
-        </button>
-</div>
-<button class="p-1.5 text-on-surface-variant hover:bg-surface-container-high/60 hover:text-primary transition-colors duration-150 active:scale-95 rounded-lg border border-outline-variant/30" title="Clinical Protocol Diagnostics">
-<span class="material-symbols-outlined text-[19px] text-primary" data-icon="settings_suggest">settings_suggest</span>
-</button>
-</div>
-</header>
-<!-- ========================================================= -->
-<!-- 3. REAL-TIME OPTICAL TELEMETRY PILLS (Sub-Header Deck)   -->
-<!-- ========================================================= -->
-<div class="fixed top-14 left-0 right-0 z-40 px-3 flex items-center justify-between pointer-events-none">
-<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pointer-events-auto py-1">
-<!-- Lighting Level -->
-<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/40 text-on-surface">
-<span class="material-symbols-outlined text-secondary text-[14px]" data-icon="light_mode">light_mode</span>
-<span class="font-label-sm text-label-sm text-secondary">840 LUX</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">OPT</span>
-</div>
-<!-- Focus Distance & Lock -->
-<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/40 text-on-surface">
-<span class="material-symbols-outlined text-primary-container text-[14px]" data-icon="center_focus_strong">center_focus_strong</span>
-<span class="font-label-sm text-label-sm text-primary">DIST: 9.8cm</span>
-<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-</div>
-<!-- Surface Tilt Angle Gauge -->
-<div class="flex items-center gap-1 px-2 py-1 rounded bg-surface-container-lowest/70 backdrop-blur-md border border-outline-variant/40 text-on-surface">
-<span class="material-symbols-outlined text-on-surface-variant text-[14px]" data-icon="screen_rotation">screen_rotation</span>
-<span class="font-label-sm text-label-sm text-on-surface">90.2° PERP</span>
-</div>
-</div>
-<!-- Zoom Factor Toggle Selector -->
-<div class="pointer-events-auto flex items-center bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/40 rounded-lg p-0.5">
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-primary bg-primary-container/20 border border-primary-container/40 font-semibold shadow-[0_0_8px_rgba(0,242,254,0.3)]">1x</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors">2x</button>
-<button class="px-2 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-primary transition-colors">5x</button>
-</div>
-</div>
-<!-- ========================================================= -->
-<!-- 4. DIAGNOSTIC APERTURE & OPTICAL RETICLE VIEWPORT        -->
-<!-- ========================================================= -->
-<main class="relative z-10 w-full h-full flex flex-col items-center justify-center pointer-events-none">
-<!-- Real-time Clinical Guidance HUD Banner (Above Center Focus) -->
-<div class="mb-4 pointer-events-auto transition-all duration-300">
-<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest/85 backdrop-blur-xl border border-secondary/40 shadow-[0_0_16px_rgba(0,242,254,0.25)]">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
-</span>
-<span class="font-label-md text-label-md text-primary tracking-wide">
-          Hold steady • Distance optimal (10cm)
-        </span>
-<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
-</div>
-</div>
-<!-- Central Precision Reticle Container -->
-<div class="relative w-[310px] h-[310px] flex items-center justify-center">
-<!-- Dynamic Precision Caliper Circles (SVG ticks & degrees) -->
-<svg class="absolute inset-0 w-full h-full reticle-svg opacity-70" viewbox="0 0 300 300">
-<!-- Outer Precision Metric Tick Marks -->
-<circle cx="150" cy="150" fill="none" r="142" stroke="rgba(0, 242, 254, 0.35)" stroke-dasharray="2 6" stroke-width="1.2"></circle>
-<circle cx="150" cy="150" fill="none" r="130" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1"></circle>
-<circle class="scan-dash-anim" cx="150" cy="150" fill="none" r="105" stroke="rgba(0, 210, 180, 0.4)" stroke-width="1"></circle>
-<!-- 4 Orientation Axis Indices -->
-<line stroke="#00f2fe" stroke-width="2" x1="150" x2="150" y1="6" y2="16"></line>
-<line stroke="#00f2fe" stroke-width="2" x1="150" x2="150" y1="284" y2="294"></line>
-<line stroke="#00f2fe" stroke-width="2" x1="6" x2="16" y1="150" y2="150"></line>
-<line stroke="#00f2fe" stroke-width="2" x1="284" x2="294" y1="150" y2="150"></line>
-<!-- Degree indicators -->
-<text fill="#e0fdff" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="150" y="28">000°</text>
-<text fill="#e0fdff" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="274" y="153">090°</text>
-<text fill="#e0fdff" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="150" y="278">180°</text>
-<text fill="#e0fdff" font-family="JetBrains Mono" font-size="8" text-anchor="middle" x="26" y="153">270°</text>
-</svg>
-<!-- Outer Caliper Bracket Rings with Specular Glow -->
-<div class="absolute inset-1 rounded-full border border-primary/20 pointer-events-none animate-pulse-optical"></div>
-<!-- High-Precision Center Crosshairs with Target Dot -->
-<div class="relative w-12 h-12 flex items-center justify-center">
-<!-- 4 Target Corner Bracket Ticks -->
-<div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-primary-container"></div>
-<div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-primary-container"></div>
-<div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-primary-container"></div>
-<div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-primary-container"></div>
-<!-- Center Target Dot & Concentric Circle -->
-<div class="w-6 h-6 rounded-full border border-secondary/80 flex items-center justify-center shadow-[0_0_10px_rgba(0,242,254,0.4)]">
-<div class="w-1.5 h-1.5 rounded-full bg-primary-container shadow-[0_0_6px_#00f2fe]"></div>
-</div>
-<!-- Crosshair Radial Lines -->
-<div class="absolute -left-10 w-8 h-[1px] bg-primary-container/40"></div>
-<div class="absolute -right-10 w-8 h-[1px] bg-primary-container/40"></div>
-<div class="absolute -top-10 h-8 w-[1px] bg-primary-container/40"></div>
-<div class="absolute -bottom-10 h-8 w-[1px] bg-primary-container/40"></div>
-</div>
-<!-- Real-Time Lesion Detection ROI (Region Of Interest) Bounding Hull -->
-<div class="absolute bottom-8 right-6 w-28 h-28 pointer-events-auto">
-<!-- Bounding Box Brackets with Cyan Edge Illumination -->
-<div class="relative w-full h-full border border-secondary/50 rounded bg-secondary/5 backdrop-blur-[2px] shadow-[0_0_12px_rgba(0,210,180,0.25)]">
-<!-- Corner Accents -->
-<div class="absolute -top-1 -left-1 w-2.5 h-2.5 border-t-2 border-l-2 border-secondary"></div>
-<div class="absolute -top-1 -right-1 w-2.5 h-2.5 border-t-2 border-r-2 border-secondary"></div>
-<div class="absolute -bottom-1 -left-1 w-2.5 h-2.5 border-b-2 border-l-2 border-secondary"></div>
-<div class="absolute -bottom-1 -right-1 w-2.5 h-2.5 border-b-2 border-r-2 border-secondary"></div>
-<!-- Micro Tag: ROI Lesion Lock Telemetry -->
-<div class="absolute -bottom-6 -left-1 flex items-center gap-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded border border-outline-variant/40">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
-<span class="font-label-sm text-label-sm text-secondary tracking-widest">ROI · Ø 4.4mm</span>
-</div>
-<!-- Top-Right Live Confidence Readout -->
-<div class="absolute -top-5 right-0 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded border border-outline-variant/40">
-<span class="font-label-sm text-label-sm text-primary">CONF 96.8%</span>
-</div>
-</div>
-</div>
-<!-- Real-time Multi-Spectral Morphological Inference Card (ABCDE Matrix) -->
-<div class="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[310px] pointer-events-auto bg-surface-container-lowest/80 backdrop-blur-xl rounded-xl p-2.5 border border-outline-variant/40 shadow-2xl">
-<div class="flex items-center justify-between border-b border-outline-variant/30 pb-1.5 mb-1.5">
-<div class="flex items-center gap-1.5">
-<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="biotech">biotech</span>
-<span class="font-label-md text-label-md text-primary font-semibold">LESION EVALUATION · LIVE</span>
-</div>
-<span class="px-1.5 py-0.2 rounded text-label-sm font-label-sm bg-secondary-container/20 text-secondary border border-secondary/30">
-            BENIGN MORPHOLOGY
-          </span>
-</div>
-<!-- 4-Column ABCDE Clinical Matrix -->
-<div class="grid grid-cols-4 gap-1.5 text-center">
-<div class="bg-surface-container-high/40 rounded p-1 border border-outline-variant/20">
-<div class="font-label-sm text-label-sm text-on-surface-variant">ASYMMETRY</div>
-<div class="font-data-metric text-[13px] text-secondary mt-0.5">0.14</div>
-<div class="font-label-sm text-[9px] text-secondary-container">LOW</div>
-</div>
-<div class="bg-surface-container-high/40 rounded p-1 border border-outline-variant/20">
-<div class="font-label-sm text-label-sm text-on-surface-variant">BORDER</div>
-<div class="font-data-metric text-[13px] text-secondary mt-0.5">REGULAR</div>
-<div class="font-label-sm text-[9px] text-secondary-container">CIRC</div>
-</div>
-<div class="bg-surface-container-high/40 rounded p-1 border border-outline-variant/20">
-<div class="font-label-sm text-label-sm text-on-surface-variant">COLOR</div>
-<div class="font-data-metric text-[13px] text-secondary mt-0.5">UNIFORM</div>
-<div class="font-label-sm text-[9px] text-secondary-container">1 TONE</div>
-</div>
-<div class="bg-surface-container-high/40 rounded p-1 border border-outline-variant/20">
-<div class="font-label-sm text-label-sm text-on-surface-variant">DIAMETER</div>
-<div class="font-data-metric text-[13px] text-primary mt-0.5">4.4mm</div>
-<div class="font-label-sm text-[9px] text-primary-container">&lt; 6mm</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-<!-- ========================================================= -->
-<!-- 5. LOWER CLINICAL ACTION STAGE & AI SHUTTER DECK         -->
-<!-- ========================================================= -->
-<div class="fixed bottom-16 left-0 right-0 z-40 px-4 flex flex-col items-center gap-3">
-<!-- Clinical Mode Selector Segmented Tabs -->
-<div class="flex items-center bg-surface-container-lowest/85 backdrop-blur-xl border border-outline-variant/40 rounded-full p-1 shadow-lg">
-<button class="px-3.5 py-1 rounded-full text-label-md font-label-md bg-secondary-container/20 text-secondary border border-secondary/40 font-semibold shadow-[0_0_10px_rgba(0,210,180,0.3)] transition-all">
-        Lesion / Mole
-      </button>
-<button class="px-3.5 py-1 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">
-        Acne / Rash
-      </button>
-<button class="px-3.5 py-1 rounded-full text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">
-        Full Body Map
-      </button>
-</div>
-<!-- Main Shutter Action Controls Row -->
-<div class="w-full max-w-sm flex items-center justify-between px-2">
-<!-- Left: Recent Lesion Scan Thumbnail Shortcut -->
-<button onclick="window.location.href='diagnostic_assessment.html'" class="group flex flex-col items-center gap-1 active:scale-95 transition-transform" title="View Recent Session Lesion">
-<div class="relative w-12 h-12 rounded-lg overflow-hidden border border-outline-variant/50 group-hover:border-primary-container transition-colors shadow-md bg-surface-container-high">
-<!-- Thumbnail preview of lesion -->
-<div class="w-full h-full bg-cover bg-center" data-alt="A macro clinical dermatoscopic derm-lite close-up view of a small benign melanocytic skin nevus on forearm with faint hair follicles and polarized dermoscopy cross-lighting. Medical grade resolution, obsidian slate dark mode framing with emerald border halo." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDutiVNsrLvmomiBAkCeVHS3bDNixxTfqxUjI_sdq1Bx7yVA-qqULJFObjYi7EOr3uQY88mfkbgYxTkiEiWcAm10V_SBe3WqYtAyGGFBe6PNOPJ8CBgBo0kXmfq80gBZ_93Xzl6g4OrlksPmVmP2ugRZr_O1VPr4tjlZ0o3s8_aYZ-jlleR4VYD70OypZKpd6-HrE-EK6IhQhvThD9iar94pmHgksCaFCN57_7XqNRAwC3MFsjJCZCI0V9dPj353c0kigotXVvyKi2E')"></div>
-<!-- Time Badge -->
-<div class="absolute bottom-0 inset-x-0 bg-surface-container-lowest/90 text-center py-0.2">
-<span class="font-label-sm text-[8px] text-secondary font-semibold">2m ago</span>
-</div>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary">ARCHIVE</span>
-</button>
-<!-- Center: High-Fidelity Medical AI Shutter Button -->
-<div class="relative flex items-center justify-center">
-<!-- Multi-layered Outer Cyan/Emerald Glow Halo -->
-<div class="absolute -inset-3 rounded-full bg-gradient-to-r from-primary-container/30 to-secondary-container/30 blur-md animate-pulse"></div>
-<!-- Progress Readiness Ring Indicator (100% Locked) -->
-<svg class="absolute w-20 h-20 -rotate-90 pointer-events-none" viewbox="0 0 80 80">
-<circle cx="40" cy="40" fill="none" r="36" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2.5"></circle>
-<circle class="filter drop-shadow-[0_0_6px_#00f2fe]" cx="40" cy="40" fill="none" r="36" stroke="#00f2fe" stroke-dasharray="226" stroke-dashoffset="0" stroke-linecap="round" stroke-width="2.5"></circle>
-</svg>
-<!-- Tactile Capture Button Core -->
-<button class="relative w-16 h-16 rounded-full bg-gradient-to-tr from-secondary-container via-primary-container to-primary flex flex-col items-center justify-center text-surface-container-lowest font-bold shadow-[0_0_24px_rgba(0,242,254,0.6)] active:scale-90 transition-transform duration-100 ease-out focus:outline-none" id="shutter-trigger" title="Capture &amp; Run Multispectral AI Inference">
-<span class="material-symbols-outlined text-[24px] text-surface-container-lowest leading-none" data-icon="lens">lens</span>
-<span class="font-label-sm text-[9px] font-extrabold tracking-wider text-surface-container-lowest mt-0.5">SCAN</span>
-</button>
-</div>
-<!-- Right: Patient Profile & Caliper Ruler Tool -->
-<button class="group flex flex-col items-center gap-1 active:scale-95 transition-transform" title="Patient Chart #8429-A">
-<div class="w-12 h-12 rounded-lg bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/50 group-hover:border-secondary transition-colors flex flex-col items-center justify-center text-on-surface-variant group-hover:text-secondary shadow-md">
-<span class="material-symbols-outlined text-[20px]" data-icon="straighten">straighten</span>
-<span class="font-label-sm text-[8px] text-secondary font-semibold">CALIPER</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-surface-variant group-hover:text-primary">PT #8429</span>
-</button>
-</div>
-</div>
-<!-- ========================================================= -->
-<!-- 6. BOTTOM NAVIGATION BAR (Shared Component Exact Spec)    -->
-<!-- ========================================================= -->
-<!-- Active state applied autonomously: Current context is Lesion HUD (index 0) -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 safe-bottom bg-surface-container-lowest/90 dark:bg-surface-container-lowest/90 backdrop-blur-xl shadow-2xl">
-<!-- Item 1: Lesion HUD (ACTIVE) -->
-<a class="flex flex-col items-center justify-center bg-surface-container-high/70 text-secondary dark:text-secondary rounded-lg px-3 py-1.5 border border-secondary/30 shadow-[0_0_12px_rgba(0,210,180,0.25)] active:scale-95 transition-all duration-150 ease-out" href="#lesion-hud">
-<span class="material-symbols-outlined text-[20px]" data-icon="biotech" style="font-variation-settings: 'FILL' 1;">biotech</span>
-<span class="text-label-sm font-label-sm uppercase tracking-wider font-semibold mt-0.5">Lesion HUD</span>
-</a>
-<!-- Item 2: Acne Triage -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:text-primary hover:bg-surface-container-high/40 transition-all duration-150 active:scale-95" href="#acne-triage">
-<span class="material-symbols-outlined text-[20px]" data-icon="dermatology">dermatology</span>
-<span class="text-label-sm font-label-sm uppercase tracking-wider mt-0.5">Acne Triage</span>
-</a>
-<!-- Item 3: Body Map -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:text-primary hover:bg-surface-container-high/40 transition-all duration-150 active:scale-95" href="#body-map">
-<span class="material-symbols-outlined text-[20px]" data-icon="accessibility_new">accessibility_new</span>
-<span class="text-label-sm font-label-sm uppercase tracking-wider mt-0.5">Body Map</span>
-</a>
-<!-- Item 4: Archives -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-3 py-1.5 hover:text-primary hover:bg-surface-container-high/40 transition-all duration-150 active:scale-95" href="#archives">
-<span class="material-symbols-outlined text-[20px]" data-icon="folder_shared">folder_shared</span>
-<span class="text-label-sm font-label-sm uppercase tracking-wider mt-0.5">Archives</span>
-</a>
-</nav>
-<!-- Lightweight Inline Vanilla JS for Audio-Visual Shutter Micro-Interactions -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const shutterBtn = document.getElementById('shutter-trigger');
-      if (shutterBtn) {
-        shutterBtn.addEventListener('click', () => {
-          // Provide visual feedback flash
-          const flashOverlay = document.createElement('div');
-          flashOverlay.className = 'fixed inset-0 bg-primary/30 z-[100] pointer-events-none transition-opacity duration-300';
-          document.body.appendChild(flashOverlay);
-          
-          setTimeout(() => {
-            flashOverlay.classList.add('opacity-0');
-            setTimeout(() => {
-              flashOverlay.remove();
-              window.location.href = 'diagnostic_assessment.html';
-            }, 300);
-          }, 60);
 
-          // Haptic feedback if supported on mobile device
-          if (navigator.vibrate) {
-            navigator.vibrate([40, 30, 40]);
-          }
-        });
-      }
-    });
-  </script>
-</body></html>
+<body
+  class="flex items-center justify-center min-h-screen p-0 sm:p-5 sm:py-8 antialiased selection:bg-coralPeach-300 selection:text-obsidian-900">
+
+  <!-- Mobile Phone Canvas (Adapts dynamically to mobile phone screen or desktop bezel) -->
+  <div id="mobile-app"
+    class="relative w-full max-w-[420px] h-[100dvh] sm:h-[860px] sm:max-h-[92vh] sm:rounded-[46px] sm:shadow-device overflow-hidden flex flex-col bg-gradient-to-b from-roseMist-50 via-roseMist-100 to-lavenderGlow-100 border-0 sm:border-[8px] sm:border-obsidian-800/95 transition-all">
+
+    <!-- Ambient Glowing Gradient Orbs (Directly from Skincare Luxury Reference 1) -->
+    <div
+      class="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-roseMist-300/40 blur-3xl pointer-events-none animate-orb-drift"></div>
+    <div class="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-lavenderGlow-300/35 blur-3xl pointer-events-none animate-orb-drift" style="animation-delay: -4s;">
+    </div>
+    <div class="absolute -bottom-24 left-1/4 w-96 h-96 rounded-full bg-coralPeach-300/25 blur-3xl pointer-events-none animate-orb-drift" style="animation-delay: -8s;">
+    </div>
+
+    <!-- Phone Top Notch & Dynamic Island Area -->
+    <div id="status-bar"
+      class="relative w-full pt-3 pb-1 px-7 flex justify-between items-center text-xs font-semibold text-obsidian-800 select-none z-50">
+      <!-- Time Clock -->
+      <span id="clock-display" class="font-mono font-bold tracking-tight text-[13px]">09:41</span>
+
+      <!-- Modern Dynamic Island Bezel Pill (Interactive on desktop viewport) -->
+      <div onclick="toggleDynamicIsland()"
+        class="cursor-pointer hidden sm:flex items-center justify-center w-28 h-6 bg-black rounded-full shadow-inner border border-white/10 px-2.5 gap-1.5 transition-all duration-300 hover:w-40 group" id="dynamic-island-pill" title="Tap for system diagnostics">
+        <div class="w-2 h-2 rounded-full bg-emerald-500/90 animate-ping" id="dynamic-island-indicator"></div>
+        <span class="text-[9px] font-mono font-bold text-white/80 group-hover:text-white transition-colors tracking-tight whitespace-nowrap" id="dynamic-island-label">Derma v2.4</span>
+      </div>
+
+      <!-- System Connectivity & Battery -->
+      <div class="flex items-center gap-1.5 text-[14px] text-obsidian-700">
+        <span class="material-symbols-outlined text-[15px]">signal_cellular_alt</span>
+        <span class="material-symbols-outlined text-[15px]">wifi</span>
+        <span class="material-symbols-outlined text-[17px]">battery_full</span>
+      </div>
+    </div>
+
+    <!-- Active Screen Viewport -->
+    <main id="app-viewport" class="flex-1 overflow-y-auto no-scrollbar relative flex flex-col pb-28 pt-1 z-10">
+      <!-- Screens dynamically rendered via app.js -->
+    </main>
+
+    <!-- Elevated Luxury Floating Bottom Navigation Bar -->
+    <nav id="bottom-nav"
+      class="absolute bottom-4 inset-x-4 glass-nav-bar rounded-full px-3 py-1.5 flex items-center justify-around z-40 transition-all duration-300">
+      <!-- Tab 1: Home Dashboard -->
+      <button onclick="navigateTo('dashboard')" id="nav-btn-dashboard"
+        class="flex items-center gap-1.5 px-3.5 py-2 rounded-full transition-all text-coralPeach-600 bg-coralPeach-400/15 font-bold text-xs touch-spring">
+        <span class="material-symbols-outlined text-[20px] fill-1 text-coralPeach-600">spa</span>
+        <span class="text-[11px] font-bold">Home</span>
+      </button>
+
+      <!-- Tab 2: History Timeline -->
+      <button onclick="navigateTo('history')" id="nav-btn-history"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">calendar_today</span>
+      </button>
+
+      <!-- Center Floating Camera Scan Trigger (Elevated Action) -->
+      <button onclick="navigateTo('camera')" id="nav-btn-camera"
+        class="flex items-center justify-center w-12 h-12 rounded-full coral-btn shadow-coral-glow -my-3 touch-spring">
+        <span class="material-symbols-outlined text-[24px] text-white">photo_camera</span>
+      </button>
+
+      <!-- Tab 4: Skincare Guides -->
+      <button onclick="navigateTo('education')" id="nav-btn-education"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">auto_stories</span>
+      </button>
+
+      <!-- Tab 5: Profile & Privacy -->
+      <button onclick="navigateTo('profile')" id="nav-btn-profile"
+        class="flex items-center justify-center p-2 rounded-full text-obsidian-400 hover:text-obsidian-800 transition-colors touch-spring">
+        <span class="material-symbols-outlined text-[20px] text-obsidian-400">account_circle</span>
+      </button>
+    </nav>
+
+    <!-- Bottom Home Bar Indicator -->
+    <div
+      class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-obsidian-900/30 rounded-full z-40 pointer-events-none">
+    </div>
+
+    <!-- Slide-Up Interactive Modal / Drawer Container -->
+    <div id="app-modal" onclick="closeModal(event)"
+      class="hidden absolute inset-0 z-50 bg-black/40 backdrop-blur-sm flex flex-col justify-end transition-opacity duration-300">
+      <div id="modal-box" onclick="event.stopPropagation()"
+        class="w-full max-h-[85%] overflow-y-auto glass-card rounded-t-4xl p-6 shadow-2xl space-y-4 animate-modal-up border-t border-white/90">
+        <!-- Dynamically injected modal content -->
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

@@ -16,10 +16,28 @@
  * - Full XSS sanitation via escapeHtml and comprehensive accessibility touch targets.
  */
 
+// Determine Backend Origin dynamically:
+// When running on GitHub Pages (e.g. aakshcodes.github.io), route API & Media calls to the live Railway backend!
+const isGitHubPages = typeof window !== 'undefined' && window.location.hostname.includes('github.io');
+const backendOrigin = isGitHubPages ? 'https://derma-vision-app-production.up.railway.app' : '';
+const apiBase = isGitHubPages ? 'https://derma-vision-app-production.up.railway.app/api/v1' : '/api/v1';
+
+function resolveMediaUrl(url) {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:') || url.startsWith('blob:')) {
+    return url;
+  }
+  if (url.startsWith('/api/v1/')) {
+    return `${backendOrigin}${url}`;
+  }
+  return url;
+}
+
 // Application State Store
 const state = {
   currentScreen: 'dashboard',
-  apiBase: '/api/v1',
+  backendOrigin: backendOrigin,
+  apiBase: apiBase,
   user: {
     id: 'usr-8842',
     displayName: 'Skincare Lover',
@@ -1092,7 +1110,7 @@ function renderDashboard() {
             ${filteredHistory.map(item => `
               <div onclick="openHistoryItem('${item.id}')" class="cursor-pointer glass-card rounded-3xl p-3 min-w-[155px] shadow-glass flex flex-col justify-between touch-spring space-y-2">
                 <div class="relative w-full aspect-square rounded-2xl overflow-hidden border border-white/80">
-                  <img src="${item.thumbnail_url}" class="w-full h-full object-cover" alt="macro scan" />
+                  <img src="${resolveMediaUrl(item.thumbnail_url)}" class="w-full h-full object-cover" alt="macro scan" />
                   <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-bold ${
                     item.predicted_category === 'Normal' ? 'bg-botanicalSage-100 text-botanicalSage-700' : 'bg-coralPeach-300/80 text-obsidian-900'
                   }">
@@ -2181,14 +2199,14 @@ function renderResult(data) {
           <div id="slider-container" class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden select-none border border-white/80 cursor-ew-resize shadow-inner" style="touch-action: none;">
             <!-- Background: Grad-CAM Overlay Heatmap -->
             <div class="absolute inset-0">
-              <img src="${analysis.visualizations.overlay_url || state.capturedImage}" class="w-full h-full object-cover filter contrast-125" alt="Grad-CAM Heatmap" />
+              <img src="${resolveMediaUrl(analysis.visualizations.overlay_url) || state.capturedImage}" class="w-full h-full object-cover filter contrast-125" alt="Grad-CAM Heatmap" />
               <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/40 via-yellow-400/50 to-red-600/60 mix-blend-color pointer-events-none"></div>
               <span class="absolute bottom-2 right-2 bg-obsidian-900/80 backdrop-blur-md px-2 py-0.5 rounded text-[9px] font-mono text-white">Grad-CAM Jet</span>
             </div>
 
             <!-- Foreground: Original Photograph (Clipped by slider position) -->
             <div id="slider-clipped-layer" class="absolute inset-0 overflow-hidden" style="width: 50%;">
-              <img src="${analysis.visualizations.original_image_url || state.capturedImage}" class="absolute inset-0 w-full h-full object-cover max-w-none" style="width: 100vw; max-width: 420px" alt="Original" />
+              <img src="${resolveMediaUrl(analysis.visualizations.original_image_url) || state.capturedImage}" class="absolute inset-0 w-full h-full object-cover max-w-none" style="width: 100vw; max-width: 420px" alt="Original" />
               <span class="absolute bottom-2 left-2 bg-obsidian-900/80 backdrop-blur-md px-2 py-0.5 rounded text-[9px] font-mono text-white">Raw Skin Photo</span>
             </div>
 
@@ -2203,11 +2221,11 @@ function renderResult(data) {
           <!-- Side-by-Side Dual View -->
           <div class="grid grid-cols-2 gap-2">
             <div class="relative aspect-square rounded-2xl overflow-hidden border border-white/80">
-              <img src="${analysis.visualizations.original_image_url || state.capturedImage}" class="w-full h-full object-cover" alt="Raw Skin" />
+              <img src="${resolveMediaUrl(analysis.visualizations.original_image_url) || state.capturedImage}" class="w-full h-full object-cover" alt="Raw Skin" />
               <span class="absolute bottom-1.5 left-1.5 bg-black/75 px-1.5 py-0.5 rounded text-[8px] font-mono text-white">Raw Photo</span>
             </div>
             <div class="relative aspect-square rounded-2xl overflow-hidden border border-white/80">
-              <img src="${analysis.visualizations.overlay_url || state.capturedImage}" class="w-full h-full object-cover filter contrast-125" alt="Heatmap" />
+              <img src="${resolveMediaUrl(analysis.visualizations.overlay_url) || state.capturedImage}" class="w-full h-full object-cover filter contrast-125" alt="Heatmap" />
               <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/40 via-yellow-400/50 to-red-600/60 mix-blend-color pointer-events-none"></div>
               <span class="absolute bottom-1.5 right-1.5 bg-black/75 px-1.5 py-0.5 rounded text-[8px] font-mono text-white">Attention Jet</span>
             </div>
@@ -2215,7 +2233,7 @@ function renderResult(data) {
         ` : `
           <!-- Alpha Blend Overlay View (Zero DOM recreate on slide) -->
           <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/80">
-            <img src="${analysis.visualizations.original_image_url || state.capturedImage}" class="w-full h-full object-cover" alt="Original" />
+            <img src="${resolveMediaUrl(analysis.visualizations.original_image_url) || state.capturedImage}" class="w-full h-full object-cover" alt="Original" />
             <div id="blend-overlay-layer" class="absolute inset-0 bg-gradient-to-tr from-blue-600 via-yellow-400 to-red-600 mix-blend-color pointer-events-none transition-opacity" style="opacity: ${state.blendOpacity};"></div>
             <div class="absolute bottom-2 inset-x-4 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full flex items-center justify-between text-white text-[10px]">
               <span>Blend Opacity</span>
@@ -2459,7 +2477,7 @@ function renderHistory() {
         ` : state.history.map(item => `
           <div class="glass-card rounded-3xl p-3.5 shadow-glass flex items-center justify-between touch-spring">
             <div onclick="openHistoryItem('${item.id}')" class="cursor-pointer flex items-center gap-3.5 flex-1">
-              <img src="${item.thumbnail_url}" class="w-14 h-14 rounded-2xl object-cover border border-white/90 shadow-sm" alt="scan" />
+              <img src="${resolveMediaUrl(item.thumbnail_url)}" class="w-14 h-14 rounded-2xl object-cover border border-white/90 shadow-sm" alt="scan" />
               <div class="space-y-0.5">
                 <div class="flex items-center gap-2">
                   <span class="text-sm font-bold text-obsidian-900">${item.predicted_category}</span>
