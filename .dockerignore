@@ -1,0 +1,14 @@
+.git
+.github
+.venv
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+*.db
+storage/uploads/*
+storage/gradcam/*
+!storage/uploads/.gitkeep
+!storage/gradcam/.gitkeep
